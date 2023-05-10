@@ -1,30 +1,18 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_blue/flutter_blue.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'package:mcumgr_flutter_example/src/firmware_list.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:mcumgr_flutter_example/src/utils/set_ext.dart';
 import 'package:mcumgr_flutter_example/src/utils/string_ext.dart';
 
 class DeviceList extends StatelessWidget {
-  const DeviceList({ Key? key }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      
-    );
-  }
-}
-
-/*
-class DeviceList extends StatelessWidget {
-  // final flutterBlue = FlutterBlue.instance;
+  final flutterBlue = FlutterBlue.instance;
 
   DeviceList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // flutterBlue.startScan(timeout: Duration(seconds: 2));
+    flutterBlue.startScan(timeout: Duration(seconds: 2));
     return StreamBuilder(
         stream: flutterBlue.scanResults.scan<Set<ScanResult>>(
             (accumulated, value, index) =>
@@ -63,10 +51,9 @@ class DeviceList extends StatelessWidget {
         title: Text(sr.advertisementData.localName.replaceIfEmpty('n/a')),
         trailing: Text(
           sr.rssi.toString() + ' dB',
-          style: Theme.of(c).textTheme.subtitle1,
+          style: Theme.of(c).textTheme.titleMedium,
         ),
       ),
     );
   }
 }
-*/
