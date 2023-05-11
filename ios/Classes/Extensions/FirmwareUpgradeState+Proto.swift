@@ -24,7 +24,7 @@ extension FirmwareUpgradeState {
             return .validate
         case .eraseAppSettings:
             // TODO: New state
-            fatalError()
+            fatalError("Open TODOs which are not yet completed")
         }
     }
 }
