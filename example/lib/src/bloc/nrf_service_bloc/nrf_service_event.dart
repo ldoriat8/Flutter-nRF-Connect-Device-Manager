@@ -16,13 +16,13 @@ class NrfServiceAbortDiscovery extends NrfServiceEvent {}
 class _NrfServiceDeviceFound extends NrfServiceEvent {
   const _NrfServiceDeviceFound({required this.device});
 
-  final NRFDevices device;
+  final NRFDevice device;
 }
 
 class NrfServiceSelectDevice extends NrfServiceEvent {
   const NrfServiceSelectDevice({required this.device});
 
-  final NRFDevices device;
+  final NRFDevice device;
 }
 
 class _NrfServiceEncounterError extends NrfServiceEvent {

@@ -5,7 +5,7 @@ import 'package:flutter_reactive_ble/flutter_reactive_ble.dart' as frb;
 import 'package:rxdart/rxdart.dart';
 
 /// {@template ble_service}
-/// A Very Good Project created by Very Good CLI.
+/// Package handles the scanninng for devices
 /// {@endtemplate}
 class BleService {
   /// {@macro ble_service}
@@ -21,10 +21,9 @@ class BleService {
 
   /// The selected device connected to
   @visibleForTesting
-  NRFDevices? selectedDevice;
+  NRFDevice? selectedDevice;
 
-  ///
-  Stream<NRFDevices> _scanForBlitzbrilleDevices() {
+  Stream<NRFDevice> _scanForBleDevices() {
     final foundDevices = <String>{};
     return _flutterReactiveBle
         .scanForDevices(
@@ -35,15 +34,15 @@ class BleService {
           foundDevices.add(device.id);
         })
         .map(
-          (device) => NRFDevices(
+          (device) => NRFDevice(
             identifier: device.id,
             displayName: device.name,
           ),
         );
   }
 
-  ///
-  Stream<NRFDevices> scan() {
+  /// scans for ble devices 
+  Stream<NRFDevice> scan() {
     return _flutterReactiveBle.statusStream.debounce((event) {
       if (event == frb.BleStatus.unknown || event == frb.BleStatus.poweredOff) {
         return TimerStream(true, const Duration(seconds: 3));
@@ -66,16 +65,18 @@ class BleService {
         case frb.BleStatus.locationServicesDisabled:
           return Stream.error(HostBleGeneralException('Host BLE disabled'));
         case frb.BleStatus.ready:
-          return _scanForBlitzbrilleDevices();
+          return _scanForBleDevices();
       }
     });
   }
 }
 
-///
-class NRFDevices extends Equatable {
-  /// {@macro blitzbrille_device}
-  const NRFDevices({
+/// {@template NRF_device}
+/// Represents a Nrf Device
+/// {@endtemplate}
+class NRFDevice extends Equatable {
+  /// {@macro NRF_device}
+  const NRFDevice({
     required this.identifier,
     required this.displayName,
   });

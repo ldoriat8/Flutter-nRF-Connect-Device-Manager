@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mcumgr_flutter_example/src/bloc/bloc/nrf_service_bloc.dart';
 import 'package:mcumgr_flutter_example/src/bloc/view/home_page.dart';
 import 'package:mcumgr_flutter_example/src/bloc/view/nrf_service_provider.dart';
 import 'dart:async';
 
-import 'package:mcumgr_flutter_example/src/device_list.dart';
 
 void main() {
   runApp(MyApp());

@@ -18,7 +18,7 @@ class NrfServiceBloc extends Bloc<NrfServiceEvent, NrfServiceState> {
   }
 
   final BleService _service;
-  StreamSubscription<NRFDevices>? _scanSubscription;
+  StreamSubscription<NRFDevice>? _scanSubscription;
 
   Future<void> _cancelStreams() async {
     await _scanSubscription?.cancel();

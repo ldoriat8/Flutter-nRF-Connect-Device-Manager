@@ -15,7 +15,7 @@ class NrfServiceDeselected extends NrfServiceState {
 class NrfServiceDiscovering extends NrfServiceState {
   const NrfServiceDiscovering({required this.discoveredDevices});
 
-  final List<NRFDevices> discoveredDevices;
+  final List<NRFDevice> discoveredDevices;
 
   @override
   List<Object?> get props => [discoveredDevices];

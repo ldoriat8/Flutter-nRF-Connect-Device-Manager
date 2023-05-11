@@ -2,8 +2,14 @@ import 'package:ble_service/ble_service.dart';
 import 'package:flutter/material.dart';
 
 class DiscoveredDevices extends StatelessWidget {
-  const DiscoveredDevices({required this.devices, super.key});
-  final List<NRFDevices> devices;
+  const DiscoveredDevices({
+    required this.devices,
+    required this.callback,
+    super.key,
+  });
+  final List<NRFDevice> devices;
+
+  final void Function(NRFDevice, BuildContext) callback;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +69,9 @@ class DiscoveredDevices extends StatelessWidget {
                               subtitle: Text(
                                 e.identifier,
                               ),
-                              onTap: () {},
+                              onTap: () {
+                                callback(e, context);
+                              },
                             ),
                           ),
                         ),
