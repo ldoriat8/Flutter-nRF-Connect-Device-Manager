@@ -58,7 +58,21 @@ class _UpdateScreenState extends State<UpdateScreen> {
               progressStream = uManager!.progressStream;
               return _buildDefaultBody();
             } else {
-              return Center(child: CircularProgressIndicator());
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Data is empty',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    CircularProgressIndicator(),
+                  ],
+                ),
+              );
             }
           });
     } else {
@@ -150,18 +164,22 @@ class _UpdateScreenState extends State<UpdateScreen> {
 
     await ZipFile.extractToDirectory(zipFile: file, destinationDir: dir);
 
-    final manifestFile = File(p.join(dirPath, 'manifest.json'));
-    final Map<String, dynamic> content =
-        json.decode(await manifestFile.readAsString());
-    final Manifest manifest = Manifest.fromJson(content);
+    // final manifestFile = File(p.join(dirPath, 'manifest.json'));
+    // final Map<String, dynamic> content =
+    //     json.decode(await manifestFile.readAsString());
+    // final Manifest manifest = Manifest.fromJson(content);
 
-    manifest.files.forEach((section) async {
-      final filePath = p.join(manifestFile.parent.path, section.file);
-      final fileContent = await File(filePath).readAsBytes();
-      final part = section.image;
-      fwScheme.add(Tuple2(part, fileContent));
-    });
+    // manifest.files.forEach((section) async {
+    //   final filePath = p.join(manifestFile.parent.path, section.file);
+    //   final fileContent = await File(filePath).readAsBytes();
+    //   final part = section.image;
+    //   fwScheme.add(Tuple2(part, fileContent));
+    // });
 
+      final fileContent =
+          await File(p.join(dirPath, 'app_update.bin')).readAsBytes();
+      fwScheme.add(Tuple2(0, fileContent));
+    
     final updateManager =
         await FirmwareUpdateManagerFactory().getUpdateManager(widget.deviceId);
     updateManager.setup();

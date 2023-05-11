@@ -17,6 +17,7 @@ dependencies:
   rxdart: ^0.27.7
   tuple: ^2.0.1
 
+
 dev_dependencies:
   faker: ^2.1.0
   flutter_test:
